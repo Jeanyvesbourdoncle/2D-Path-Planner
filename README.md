@@ -25,7 +25,7 @@ Our restrictions are the following :
 - the car should avoid hitting other cars,
 - the car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 10 m/s^3.
 
-#------------------------------
+------------------------------
 ### Basic Definition
 ##### Main car's localization Data
 The car transmits its location. 
@@ -53,7 +53,7 @@ The car moves to a new waypoint every 20ms.
 ### PIPELINE 
 This picture resume the SW pipeline :
 <p align="center">
-<img src="./Stages_Behavior_Control.png" width="50%>
+<img src="./Stages_Behavior_Control.png" width="50% style = "border:none;">
 </p> 
 
 
@@ -79,7 +79,7 @@ Step 2 : Finite State Machine : Keep Lane State/ Prepare change Lane Right / Pre
 Step 3 : Lane Changer accepted or not (depends of the result of the step 2).
 
 <p align="center">
-<img src="./Machine_Etat_Fini.png" width="50%>
+<img src="./Machine_Etat_Fini.png" width="50% style = "border:none;>
 </p> 
 
 
