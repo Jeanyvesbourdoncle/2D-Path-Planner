@@ -68,15 +68,15 @@ The data format for each car is [id,x,y,vx,vy,s,d] :
 - ["s"] : car's position in local Frenet coordinates,
 - ["d"] : car's position in local Frenet coordinates. 
 
-The vx,vy values are useful for the prediction where the cars will be in the future.
-The future predicted Frenet 's' value will be its current 's' value plus its transformed total velocity(m/s) multiplied by the time elapsed into the future(s). 
+- The vx,vy values are useful for the prediction where the cars will be in the future.
+- The future predicted Frenet 's' value will be its current 's' value plus its transformed total velocity(m/s) multiplied by the time elapsed into the future(s). 
 
 
 #### Step 2 : Behavior Control
 The "behavior control" is composed about 3 steps : 
-Step 1 : ACC = Adaptive Cruise Control : control the safety distance between the current vehicle and the vehicle front, 
-Step 2 : Finite State Machine : Keep Lane State/ Prepare change Lane Right / Prepare Change Lane left, depends of the position of the vehicle on the different lanes, 
-Step 3 : Lane Changer accepted or not (depends of the result of the step 2).
+- Step 1 : ACC = Adaptive Cruise Control : control the safety distance between the current vehicle and the vehicle front, 
+- Step 2 : Finite State Machine : Keep Lane State/ Prepare change Lane Right / Prepare Change Lane left, depends of the position of the vehicle on the different lanes, 
+- Step 3 : Lane Changer accepted or not (depends of the result of the step 2).
 
 <p align="center">
 <img src="./Machine_Etat_Fini.png" width="50% style = "border:none;>
@@ -85,24 +85,20 @@ Step 3 : Lane Changer accepted or not (depends of the result of the step 2).
 
 #### Step 3 : Spline Creation
 The target is to create paths to smoothly change lanes.
+
 It's the creation of 5 points that the spline will use to generate the function that will connect such point in a smooth trajectory.
-For the creation of a smooth trajectories, the spline tool is : http://kluge.in-chemnitz.de/opensource/spline/
+
 The spline fitting guarantees that the generated function passes through every point.
+
 The acceleration and jerk part are solved from linear equations for 's' and 'd' functions with the provided Eigen 3-3 library.
+
 The last part is the function to transform the (s,d) points to (x,y) points for the returned path.
 
 
 #### Step 4 : Waypoint Planner
 The target is to create each of the individuals points in x that the car fill follow feed them into the spline function to look for the corresponding y.
+
 The first waypoint from the previous path are used and the rest of the new path based on the new data from the car's sensor fusion.       
-
-------------------------------------
-### Details
-There will be some latency between the simulator running and the path planner returning a path with optimized code usually its not very long maybe just 1-3 time steps. 
-During this delay the simulator will continue using points that it was last given, its a good idea to store the last points you have used so you can have a smooth transition. 
-[Previous_path_x] and [Previous_path_y] are helpful for this transition since they show the last points given to the simulator controller with the processed points already removed. 
-You would either return a path that extends this previous path or make sure to create a new path that has a smooth transition with this last path.
-
 -----------------
 ### Ressources
 For the creation of a smooth trajectories (Step : Spline Creation) : http://kluge.in-chemnitz.de/opensource/spline/
